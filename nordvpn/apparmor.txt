@@ -1,0 +1,100 @@
+#include <tunables/global>
+
+profile nordvpn_cli flags=(attach_disconnected,mediate_deleted) {
+  #include <abstractions/base>
+
+  #
+  # Capabilities (VPN + routing)
+  #
+  capability net_admin,
+  capability net_raw,
+  capability sys_admin,
+  capability dac_override,
+  capability setuid,
+  capability setgid,
+  capability chown,
+  capability kill,
+
+  #
+  # Networking
+  #
+  network,
+  unix,
+  signal (send) set=(kill,term,int,hup,cont),
+
+  #
+  # S6 overlay bits
+  #
+  /init ix,
+  /bin/** ix,
+  /usr/bin/** ix,
+  /usr/sbin/** ix,
+  /run/{s6,s6-rc*,service}/** ix,
+  /package/** ix,
+  /command/** ix,
+  /etc/services.d/** rwix,
+  /etc/cont-init.d/** rwix,
+  /etc/cont-finish.d/** rwix,
+
+  #
+  # Add-on runtime storage
+  #
+  /data/** rw,
+  /share/** rw,
+  /tmp/** rwk,
+  /run/** rwk,
+  /var/run/** rwk,
+
+  #
+  # Devices: TUN is mandatory for VPN
+  #
+  /dev/null rw,
+  /dev/urandom r,
+  /dev/random r,
+  /dev/tty rw,
+  /dev/net/tun rw,
+
+  #
+  # DNS + certificates
+  #
+  /etc/hosts r,
+  /etc/hostname r,
+  /etc/nsswitch.conf r,
+  /etc/resolv.conf r,
+  /etc/ssl/** r,
+  /usr/share/ca-certificates/** r,
+
+  #
+  # Common system reads used by iproute2/iptables/daemons
+  #
+  /proc/** r,
+  /sys/** r,
+  /etc/passwd r,
+  /etc/group r,
+
+  #
+  # NordVPN files/state
+  #
+  /var/lib/nordvpn/** rwk,
+  /var/log/nordvpn/** rwk,
+  /run/nordvpn/** rwk,
+
+  #
+  # Executables
+  #
+  /usr/bin/nordvpn rix,
+  /usr/sbin/nordvpnd rix,
+
+  #
+  # Tools 
+  #
+  /usr/sbin/iptables rix,
+  /usr/sbin/ip6tables rix,
+  /usr/sbin/xtables-legacy-multi rix,
+  /sbin/iptables rix,
+  /sbin/ip6tables rix,
+  /sbin/ip rix,
+  /usr/sbin/ip rix,
+  /bin/bash rix,
+  /usr/bin/jq rix,
+}

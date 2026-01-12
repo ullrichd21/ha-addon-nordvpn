@@ -1,0 +1,39 @@
+name: "NordVPN CLI"
+slug: "nordvpn_cli"
+description: "NordVPN CLI tunnel on HAOS (runs nordvpnd + nordvpn inside the add-on)"
+version: "0.1.0"
+url: "https://github.com/ullrichd21/ha-addon-nordvpn"
+image: "ghcr.io/ullrichd21/ha-addon-nordvpn-{arch}"
+arch:
+  - aarch64
+  - amd64
+  - armv7
+startup: services
+boot: auto
+init: false
+
+full_access: true
+
+host_network: true
+
+options:
+  token: ""
+  connect: true
+  country: ""
+  city: ""
+  server: ""
+  technology: "nordlynx"
+  protocol: "udp"
+  autoconnect: true
+  killswitch: true
+
+schema:
+  token: str
+  connect: bool
+  country: str?
+  city: str?
+  server: str?
+  technology: "nordlynx"
+  protocol: list(udp|tcp)?
+  autoconnect: bool?
+  killswitch: bool?
