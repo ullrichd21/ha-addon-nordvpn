@@ -35,4 +35,3 @@ jobs:
             --target nordvpn
             --docker-hub ghcr.io/${{ github.repository_owner }}
             --image ha-addon-nordvpn
-            --tag latest
