@@ -36,8 +36,7 @@ echo "Logging in..."
 nordvpn login --token "$TOKEN" || true
 
 # Apply settings (ignore failures if unsupported)
-if [[ -n "$TECH" ]]; then nordvpn set technology "$TECH" || true; fi
-if [[ -n "$PROTO" ]]; then nordvpn set protocol "$PROTO" || true; fi
+nordvpn set technology nordlynx || true
 if [[ "$AUTOCONNECT" == "true" ]]; then nordvpn set autoconnect on || true; else nordvpn set autoconnect off || true; fi
 if [[ "$KILLSWITCH" == "true" ]]; then nordvpn set killswitch on || true; else nordvpn set killswitch off || true; fi
 

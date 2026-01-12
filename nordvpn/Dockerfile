@@ -1,7 +1,9 @@
-ARG BUILD_FROM=debian:bookworm-slim
-FROM ${BUILD_FROM}
+FROM debian:bookworm-slim
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+#Debug...
+RUN cat /etc/os-release || true
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
