@@ -1,6 +1,6 @@
 #include <tunables/global>
 
-profile nordvpn_cli flags=(attach_disconnected,mediate_deleted) {
+profile nordvpn_cli flags=(attach_disconnected,mediate_deleted,complain) {
   #include <abstractions/base>
 
   #

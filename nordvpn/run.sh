@@ -41,13 +41,30 @@ echo "Logging in..."
 # Token login
 nordvpn login --token "$TOKEN" || true
 
-# Apply settings (ignore failures if unsupported)
-nordvpn set technology nordlynx || true
-if [[ "$AUTOCONNECT" == "true" ]]; then nordvpn set autoconnect on || true; else nordvpn set autoconnect off || true; fi
-if [[ "$KILLSWITCH" == "true" ]]; then nordvpn set killswitch on || true; else nordvpn set killswitch off || true; fi
-if [[ "$MESHNET" == "true" ]]; then nordvpn set meshnet on || true; else nordvpn set meshnet off || true; fi
+if [[ "$MESHNET" == "true" ]]; then
+	echo "Enabling Meshnet..."
+	nordvpn set meshnet on
+else
+	echo "Disabling Meshnet..."
+	nordvpn set meshnet off || true
+fi
 
 if [[ "$CONNECT" == "true" ]]; then
+	echo "VPN connect requested."
+
+	# These are VPN-only knobs (don’t touch them unless connecting)
+	if [[ "$AUTOCONNECT" == "true" ]]; then
+		nordvpn set autoconnect on || true
+	else
+		nordvpn set autoconnect off || true
+	fi
+
+	if [[ "$KILLSWITCH" == "true" ]]; then
+		nordvpn set killswitch on || true
+	else
+		nordvpn set killswitch off || true
+	fi
+
 	echo "Connecting..."
 	if [[ -n "$SERVER" ]]; then
 		nordvpn connect "$SERVER"
@@ -58,8 +75,6 @@ if [[ "$CONNECT" == "true" ]]; then
 	else
 		nordvpn connect
 	fi
-else
-	echo "CONNECT=false; not connecting."
 fi
 
 echo "NordVPN add-on is running."
