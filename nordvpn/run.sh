@@ -24,6 +24,9 @@ if [[ -z "$TOKEN" ]]; then
 	exit 1
 fi
 
+echo "TEST TEST:"
+ls -l /dev/net/tun || true
+
 echo "Starting nordvpnd..."
 if command -v nordvpnd >/dev/null 2>&1; then
 	nordvpnd &
