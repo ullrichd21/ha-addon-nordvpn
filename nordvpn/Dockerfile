@@ -19,7 +19,7 @@ RUN curl -fsSL -o /tmp/nordvpn-release.deb https://repo.nordvpn.com/deb/nordvpn/
 	&& apt-get install -y --no-install-recommends nordvpn \
 	&& rm -rf /var/lib/apt/lists/*
 
-COPY run.sh /
-RUN chmod a+x /run.sh
+COPY run.sh /usr/bin/run.sh
+RUN chmod 755 /usr/bin/run.sh
 
-CMD ["/run.sh"]
+CMD ["/bin/bash", "/usr/bin/run.sh"]

@@ -96,6 +96,6 @@ profile nordvpn_cli flags=(attach_disconnected,mediate_deleted) {
   /sbin/ip rix,
   /usr/sbin/ip rix,
   /bin/bash rix,
+  /usr/bin/run.sh rix,
   /usr/bin/jq rix,
-  /run.sh rix,
 }
