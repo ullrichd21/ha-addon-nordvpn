@@ -8,8 +8,6 @@ CONNECT="$(jq -r '.connect // true' "$OPTIONS")"
 COUNTRY="$(jq -r '.country // ""' "$OPTIONS")"
 CITY="$(jq -r '.city // ""' "$OPTIONS")"
 SERVER="$(jq -r '.server // ""' "$OPTIONS")"
-TECH="$(jq -r '.technology // ""' "$OPTIONS")"
-PROTO="$(jq -r '.protocol // ""' "$OPTIONS")"
 AUTOCONNECT="$(jq -r '.autoconnect // true' "$OPTIONS")"
 KILLSWITCH="$(jq -r '.killswitch // true' "$OPTIONS")"
 
