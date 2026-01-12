@@ -1,7 +1,7 @@
 name: "NordVPN CLI"
 slug: "nordvpn_cli"
 description: "NordVPN CLI tunnel on HAOS (runs nordvpnd + nordvpn inside the add-on)"
-version: "0.1.2"
+version: "0.1.3"
 url: "https://github.com/ullrichd21/ha-addon-nordvpn"
 arch:
   - aarch64
@@ -22,16 +22,18 @@ host_network: true
 
 options:
   token: ""
-  connect: true
+  connect: false
+  meshnet: true
   country: ""
   city: ""
   server: ""
-  autoconnect: true
+  autoconnect: false
   killswitch: true
 
 schema:
   token: str
   connect: bool
+  meshnet: bool
   country: str?
   city: str?
   server: str?
