@@ -34,5 +34,4 @@ jobs:
             --aarch64
             --target nordvpn
             --docker-hub ghcr.io/${{ github.repository_owner }}
-            --image ha-addon-nordvpn
-            --suffix -{arch}
+            --image ha-addon-nordvpn-{arch}
