@@ -26,8 +26,6 @@ options:
   country: ""
   city: ""
   server: ""
-  technology: list(nordlynx|openvpn)?
-  protocol: "udp"
   autoconnect: true
   killswitch: true
 
@@ -37,7 +35,5 @@ schema:
   country: str?
   city: str?
   server: str?
-  technology: list(nordlynx|openvpn)?
-  protocol: list(udp|tcp)?
   autoconnect: bool?
   killswitch: bool?
