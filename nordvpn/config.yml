@@ -1,7 +1,7 @@
 name: "NordVPN CLI"
 slug: "nordvpn_cli"
 description: "NordVPN CLI tunnel on HAOS (runs nordvpnd + nordvpn inside the add-on)"
-version: "0.1.10"
+version: "0.1.11"
 url: "https://github.com/ullrichd21/ha-addon-nordvpn"
 arch:
   - aarch64
@@ -16,10 +16,12 @@ startup: services
 boot: auto
 init: false
 
-full_access: true
 privileged:
   - NET_ADMIN
   - NET_RAW
+devices:
+  - /dev/net/tun
+
 host_network: true
 
 sysctls:
