@@ -3,7 +3,7 @@ FROM debian:bookworm-slim
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 #Debug...
-RUN cat /etc/os-release || true
+RUN apt-get update && apt-get install -y --no-install-recommends libcap2-bin && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \

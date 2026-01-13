@@ -25,7 +25,8 @@ if [[ -z "$TOKEN" ]]; then
 fi
 
 echo "TEST TEST:"
-ls -l /dev/net/tun || true
+echo "Caps:"
+capsh --print | sed -n '1,120p' || true
 
 echo "Starting nordvpnd..."
 if command -v nordvpnd >/dev/null 2>&1; then

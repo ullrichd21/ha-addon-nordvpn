@@ -17,7 +17,9 @@ boot: auto
 init: false
 
 full_access: true
-
+privileged:
+  - NET_ADMIN
+  - NET_RAW
 host_network: true
 
 options:
