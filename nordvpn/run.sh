@@ -24,9 +24,19 @@ if [[ -z "$TOKEN" ]]; then
 	exit 1
 fi
 
-echo "TEST TEST:"
-echo "Caps:"
-capsh --print | sed -n '1,120p' || true
+# Workaround for HAOS/Docker blocking sysctl writes via /proc/sys
+# Remount proc somewhere else and write sysctls through that mount.
+# https://community.home-assistant.io/t/how-do-i-edit-sysctl-values-permanently/504609
+mkdir -p /remounted_proc
+
+# If already mounted...
+if ! mountpoint -q /remounted_proc; then
+	mount -t proc proc /remounted_proc
+fi
+
+# test
+echo 2 > /remounted_proc/sys/net/ipv4/conf/all/rp_filter || true
+echo 2 > /remounted_proc/sys/net/ipv4/conf/default/rp_filter || true
 
 echo "Starting nordvpnd..."
 if command -v nordvpnd >/dev/null 2>&1; then
